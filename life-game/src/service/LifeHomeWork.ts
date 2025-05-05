@@ -66,6 +66,9 @@ export default class LifeMatrix{
                     else
                         this._matrix[i][j] = 0;
                 }
+                if (value == 0)
+                    if (count == 3)
+                        this._matrix[i][j] = 1;
             }
         }
         return this._matrix;
