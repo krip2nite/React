@@ -13,7 +13,7 @@ function App() {
       <GridItem area="nav" bg="white" ><Nav></Nav>
       </GridItem>
       <Stack hideBelow="md">
-        <GridItem area="aside" bg="gold">ASIDE</GridItem>
+        <GridItem area="aside" bg="gold">ASIDEASIDE</GridItem>
       </Stack>
       <GridItem area="main">
         <GameGrid></GameGrid>
