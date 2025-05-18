@@ -1,18 +1,10 @@
-import { useEffect, useState } from 'react'
-import api from '../services/api-client'
 import {  Text } from '@chakra-ui/react'
-import { AxiosError } from 'axios'
-import { Genre, FetchGenersResponse} from '../model/fetch-gener-types'
+import { Genre } from '../model/fetch-gener-types'
+import useData from '../hooks/useData'
+
 const GenreList = () => {
-    const [genres, setGenres] = useState<Genre[]>()
-    const [error, setError] = useState<string>('');
-    useEffect(()=>{
-       api.get<FetchGenersResponse>("/genres")
-       .then(res => setGenres(res.data.results))
-       .catch((e: AxiosError) => {
-        setError(e.message);
-       })
-    }, [])
+    const {error,data} = useData<Genre>('/genres');
+    const genres = data
     
   return (
     <>
