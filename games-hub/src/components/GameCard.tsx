@@ -22,8 +22,8 @@ const GameCard: React.FC<Props> = ({game}) => {
         src={game.background_image}
         alt={`image for game ${game.name}`}
       />
-      <Card.Body gap="2" background={game.metacritic > 90 ? 'green' : 'lightgrey'}>
-        <Card.Title color={game.metacritic > 90 ? 'white' : 'black'}>{game.name}</Card.Title>
+      <Card.Body gap="2">
+        <Card.Title>{game.name}</Card.Title>
         <Card.Footer>
           <HStack justifyContent={'space-between'}>
                      <Text >{game.platforms.map(p => p.platform.name).join("; ")}</Text>
