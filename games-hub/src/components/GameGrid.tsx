@@ -1,11 +1,9 @@
-
-import { Game } from '../model/fetch-game-types'
 import { SimpleGrid, Text } from '@chakra-ui/react'
 import GameCard from './GameCard'
-import useData from '../hooks/useData'
+import useGame from '../hooks/useGame'
 
 const GameGrid = () => {
-  const {error,data} = useData<Game>('/games');
+  const {error,data} = useGame();
   const games = data
   return (
     <>
@@ -25,7 +23,6 @@ const GameGrid = () => {
         md: 3
     }} gap={5} maxHeight={"80vh"} overflow={"auto"}>
         {games?.map(g => <GameCard key={g.id} game={g}>
-            
             </GameCard>)}
     </SimpleGrid>}
     </>
