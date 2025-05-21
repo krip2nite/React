@@ -6,7 +6,6 @@ const Nav = () => {
   return (
     <HStack justifyContent={"space-between"}>
         <Image src={logo} boxSize={"10"}/>
-        Navigate
         <ColorModeButton/>
     </HStack>
   )
