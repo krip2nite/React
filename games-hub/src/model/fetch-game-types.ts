@@ -12,4 +12,5 @@ export interface Game {
     metacritic: number,
     parent_platforms: Platform[]
     genres : string;
+    rating: number
 }

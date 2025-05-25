@@ -1,6 +1,8 @@
 import React from 'react'
 import { Game } from '../model/fetch-game-types';
-import { Card, Image, Text, HStack, Badge } from '@chakra-ui/react';
+import { Card, Image, Text, HStack, Badge, VStack } from '@chakra-ui/react';
+import Rater from './Rater';
+
 
 interface Props{
     game: Game;
@@ -25,10 +27,21 @@ const GameCard: React.FC<Props> = ({game}) => {
       <Card.Body gap="2">
         <Card.Title>{game.name}</Card.Title>
         <Card.Footer>
-          <HStack justifyContent={'space-between'}>
-                     <Text >{game.parent_platforms.map(p => p.platform.name).join("; ")}</Text>
-                     <Badge {...getColors(game.metacritic)} fontSize={"0.5rem"} borderRadius={20}>{game.metacritic}</Badge>
-                 </HStack>
+            <VStack>
+            <HStack justifyContent={"space-between"}>
+              <Text>
+                {game.parent_platforms.map((p) => p.platform.slug).join("; ")}
+              </Text>
+              <Badge
+                {...getColors(game.metacritic)}
+                fontSize={"0.5rem"}
+                borderRadius={20}
+              >
+                {game.metacritic}
+              </Badge>
+            </HStack>
+            <Rater rate={game.rating}></Rater>
+          </VStack>
         </Card.Footer>
       </Card.Body>
     </Card.Root>
