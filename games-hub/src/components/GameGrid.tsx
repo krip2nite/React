@@ -2,12 +2,16 @@ import { SimpleGrid,Spinner, Text } from '@chakra-ui/react'
 import GameCard from './GameCard'
 import useGame from '../hooks/useGame'
 import { FC } from 'react'
+import ParentPlatform from '../model/ParentPlatform'
+
 interface Props{
   selectedGenre: string | null
+  selectedPlatform: ParentPlatform | null
 }
-const GameGrid: FC<Props> = ({selectedGenre}) => {
 
-  const {error, data: games, isLoading} = useGame(selectedGenre);
+const GameGrid: FC<Props> = ({selectedGenre, selectedPlatform}) => {
+
+  const {error, data: games, isLoading} = useGame(selectedGenre, selectedPlatform);
   
   return (
     <>

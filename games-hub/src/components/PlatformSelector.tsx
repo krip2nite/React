@@ -1,12 +1,19 @@
-import { Button, Menu, Portal } from '@chakra-ui/react'
-import React from 'react'
+import { Button, Menu, Portal, Spinner } from '@chakra-ui/react'
 import { FaChevronDown } from 'react-icons/fa'
 import usePlatform from '../hooks/usePlatform'
+import ParentPlatform from '../model/ParentPlatform'
+import { FC } from 'react'
 
-const PlatformSelector = () => {
+interface Props{
+    onSelectPlatform: (selectedPlatform: ParentPlatform) => void
+}
+
+const PlatformSelector: FC<Props> = ({onSelectPlatform})=> {
     const {error,data: platforms, isLoading} = usePlatform()
   return (
-    <Menu.Root>
+    <>
+    {isLoading && <Spinner/>}
+    {!error && <Menu.Root>
       <Menu.Trigger asChild>
         <Button variant="outline" size="sm" marginBottom={3}>
           Platforms
@@ -16,11 +23,14 @@ const PlatformSelector = () => {
       <Portal>
         <Menu.Positioner>
           <Menu.Content>
-            {platforms.map(p => <Menu.Item value={p.id}>{p.name}</Menu.Item>)}
+            {platforms.map(p => <Menu.Item value={p.id} 
+            onClick={() => onSelectPlatform(p)}>{p.name}</Menu.Item>)}
           </Menu.Content>
         </Menu.Positioner>
       </Portal>
     </Menu.Root>
+    }
+    </>
   )
 }
 
