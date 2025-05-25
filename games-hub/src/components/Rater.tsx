@@ -30,7 +30,8 @@ const Rater: FC<Props>= ({starsNumber= 5, maxRate=5, rate}) => {
         filledStars: number;
         halfFilledStar: boolean;
         emptyStars: number;
-    } {
+    } 
+    {
         const normStarsNumber= (starsNumber * rate) / maxRate;
         let totalStars = starsNumber;
         let filledStars = Math.trunc(normStarsNumber);
