@@ -5,10 +5,11 @@ import ParentPlatform from '../model/ParentPlatform'
 import { FC } from 'react'
 
 interface Props{
-    onSelectPlatform: (selectedPlatform: ParentPlatform) => void
+    onSelectPlatform: (selectedPlatform: ParentPlatform) => void;
+    selectedPlatform: ParentPlatform | null;
 }
 
-const PlatformSelector: FC<Props> = ({onSelectPlatform})=> {
+const PlatformSelector: FC<Props> = ({onSelectPlatform, selectedPlatform})=> {
     const {error,data: platforms, isLoading} = usePlatform()
   return (
     <>
@@ -16,7 +17,7 @@ const PlatformSelector: FC<Props> = ({onSelectPlatform})=> {
     {!error && <Menu.Root>
       <Menu.Trigger asChild>
         <Button variant="outline" size="sm" marginBottom={3}>
-          Platforms
+          {selectedPlatform?.name || "Platforms"}
           <FaChevronDown></FaChevronDown>
         </Button>
       </Menu.Trigger>
