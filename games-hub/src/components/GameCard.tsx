@@ -25,7 +25,7 @@ const GameCard: React.FC<Props> = ({game}) => {
         alt={`image for game ${game.name}`}
       />
       <Card.Body gap="2">
-        <Card.Title overflow={"hidden"} textWrap={"nowrap"}>{game.name}</Card.Title>
+        <Card.Title overflow={"hidden"} textWrap={"nowrap"} textOverflow={"ellipsis"}>{game.name}</Card.Title>
         <Card.Footer>
             <VStack>
             <HStack justifyContent={"space-between"}>

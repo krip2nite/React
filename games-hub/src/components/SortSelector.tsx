@@ -2,12 +2,13 @@ import { Menu, Button, Portal } from "@chakra-ui/react";
 import { FaChevronDown, FaChevronUp } from "react-icons/fa";
 import { FC, useState } from "react";
 import sortOptions from "../config/sort-config.json"
+import MotionComponent from "./MotionComponent";
 export type SortOption = typeof sortOptions[0]
 interface Props {
   selectedOrdering: SortOption | null;
   onSelectOrdering: (platform: SortOption | null) => void;
 }
-
+const duration = 0.7;
 const SortSelector: FC<Props> = ({ onSelectOrdering, selectedOrdering}) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   return (
@@ -23,28 +24,30 @@ const SortSelector: FC<Props> = ({ onSelectOrdering, selectedOrdering}) => {
               >
                 {` Order by ${selectedOrdering?.displayName || "Relevance"}`}
                 {isOpen ? 
-                    <FaChevronUp />
+                    <MotionComponent duration={duration}>
+                      <FaChevronUp />
+                    </MotionComponent>
                : <FaChevronDown></FaChevronDown>}
               </Button>
             </Menu.Trigger>
             <Portal>
               <Menu.Positioner>
-               
-                    <Menu.Content>
-                     
-                      {sortOptions.map((option) => (
-                        <Menu.Item
-                          key={option.value}
-                          onClick={() => {
-                            onSelectOrdering(option);
-                            setIsOpen(false);
-                          }}
-                          value={option.value}
-                        >
-                          {option.displayName}
-                        </Menu.Item>
-                      ))}
-                    </Menu.Content>
+                    <MotionComponent duration={duration}>
+                      <Menu.Content>
+                        {sortOptions.map((option) => (
+                          <Menu.Item
+                            key={option.value}
+                            onClick={() => {
+                              onSelectOrdering(option);
+                              setIsOpen(false);
+                            }}
+                            value={option.value}
+                          >
+                            {option.displayName}
+                          </Menu.Item>
+                        ))}
+                      </Menu.Content>
+                    </MotionComponent>
               </Menu.Positioner>
             </Portal>
           </Menu.Root>
