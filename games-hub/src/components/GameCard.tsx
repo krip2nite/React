@@ -2,7 +2,7 @@ import React from 'react'
 import { Game } from '../model/fetch-game-types';
 import { Card, Image, Text, HStack, Badge, VStack } from '@chakra-ui/react';
 import Rater from './Rater';
-
+import noImage from '../assets/noImage.jpg'
 
 interface Props{
     game: Game;
@@ -21,24 +21,24 @@ const GameCard: React.FC<Props> = ({game}) => {
       sm: "sm"
     }} overflow="hidden">
       <Image height = {"100%"} objectFit={"cover"}
-        src={game.background_image}
+        src={game.background_image || noImage}
         alt={`image for game ${game.name}`}
       />
       <Card.Body gap="2">
-        <Card.Title>{game.name}</Card.Title>
+        <Card.Title overflow={"hidden"} textWrap={"nowrap"}>{game.name}</Card.Title>
         <Card.Footer>
             <VStack>
             <HStack justifyContent={"space-between"}>
               <Text>
-                {game.parent_platforms.map((p) => p.platform.slug).join("; ")}
+                {game.parent_platforms?.map((p) => p.platform.slug).join("; ")}
               </Text>
-              <Badge
+              {game.metacritic && <Badge
                 {...getColors(game.metacritic)}
                 fontSize={"0.5rem"}
                 borderRadius={20}
               >
                 {game.metacritic}
-              </Badge>
+              </Badge>}
             </HStack>
             <Rater rate={game.rating}></Rater>
           </VStack>

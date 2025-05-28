@@ -13,4 +13,5 @@ export interface Game {
     parent_platforms: Platform[]
     genres : string;
     rating: number
+    ordering : string;
 }
