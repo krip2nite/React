@@ -1,0 +1,22 @@
+import { Box, Input, InputGroup } from "@chakra-ui/react"
+import { useRef, FC } from "react"
+import { LuSearch } from "react-icons/lu"
+
+interface Props{
+    onSubmitText: (text: string) => void
+}
+
+const SearchBar:FC<Props> = ({onSubmitText}) => {
+    const inputElement = useRef<HTMLInputElement>(null)
+  return (
+    <Box width="100%" as="form" onSubmit={(event) => {
+        event.preventDefault();
+        onSubmitText(inputElement.current?.value ?? "")}}>
+        <InputGroup flex="1" startElement={<LuSearch/>}>
+            <Input ref={inputElement} placeholder="Search games..." borderRadius={"30px"}/>
+        </InputGroup>
+    </Box>
+  )
+}
+
+export default SearchBar

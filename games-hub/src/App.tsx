@@ -18,7 +18,8 @@ function App() {
       base: '"nav" "main"' ,
       md: '"nav nav" "aside main"'
     }}>
-      <GridItem area="nav" bg="white" ><Nav></Nav>
+      <GridItem area="nav" bg="white" ><Nav onSubmitText={(text: string) => setGameQuery({...gameQuery,
+         searchText: text})}></Nav>
       </GridItem>
       <Stack hideBelow="md">
         <GridItem area="aside">

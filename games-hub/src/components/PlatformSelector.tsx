@@ -29,7 +29,7 @@ const PlatformSelector: FC<Props> = ({onSelectPlatform, selectedPlatform})=> {
         <Menu.Positioner>
           <MotionComponent duration={duration}>
             <Menu.Content>
-              {platforms.map(p => <Menu.Item value={p.id}
+              {platforms.map(p => <Menu.Item key={p.id} value={p.id}
               onClick={() => {onSelectPlatform(p), setIsOpen(false)}}>{p.name}</Menu.Item>)}
             </Menu.Content>
           </MotionComponent>
