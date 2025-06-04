@@ -1,29 +1,36 @@
-import './App.css'
-import { Grid, GridItem, Stack} from '@chakra-ui/react'
-import Nav from './components/Nav'
-import GameGrid from './components/GameGrid'
-import GenreList from './components/GenreList'
-import { useState } from 'react'
-import PlatformSelector from './components/PlatformSelector'
-// import ParentPlatform from './model/ParentPlatform'
-import GameQuery from './model/GameQuery'
-import SortSelector from './components/SortSelector'
+import "./App.css";
+import { Box, Grid, GridItem, HStack, Stack } from "@chakra-ui/react";
+import Nav from "./components/Nav";
+import GameGrid from "./components/GameGrid";
+import GenreList from "./components/GenreList";
+import { useState } from "react";
+import PlatformSelector from "./components/PlatformSelector";
+import GameQuery from "./model/GameQuery";
+import SortSelector from "./components/SortSelector";
+import GenreSelector from "./components/GenreSelector";
 
 function App() {
   // const [selectedGenre, setSelectedGenre] = useState<string | null>(null);  
   // const [selectedPlatform, setSelectedPlatform] = useState<ParentPlatform | null>(null);
   const [gameQuery, setGameQuery] = useState<GameQuery>({} as GameQuery);
   return (
-    <Grid templateAreas={{
-      base: '"nav" "main"' ,
-      md: '"nav nav" "aside main"'
-    }}>
-      <GridItem area="nav" bg="white" ><Nav onSubmitText={(text: string) => setGameQuery({...gameQuery,
-         searchText: text})}></Nav>
+    <Grid
+      templateAreas={{
+        base: '"nav" "main" ',
+        md: '"nav nav" "aside main"',
+      }}
+    >
+      <GridItem area="nav">
+        <Nav
+          onSubmitText={(text: string) => {
+            console.log(text, "app comp");
+            setGameQuery({ ...gameQuery, searchText: text });
+          }}
+        ></Nav>
       </GridItem>
       <Stack hideBelow="md">
-        <GridItem area="aside">
-          <GridItem area="aside" paddingX="5" ></GridItem>
+        <GridItem area="aside" paddingX="5">
+
           {/* <GenreList selectedGenre={selectedGenre} onSelectGenre={(selectedGenre) => setSelectedGenre(selectedGenre)}></GenreList> */}
         <GenreList
             selectedGenre={gameQuery.genreName}
@@ -33,16 +40,24 @@ function App() {
           />
         </GridItem>
       </Stack>
-      <GridItem area="main">
-        {/* <PlatformSelector selectedPlatform={selectedPlatform} onSelectPlatform={(selectedPlatform) => setSelectedPlatform(selectedPlatform)} ></PlatformSelector>
-        <GameGrid selectedGenre={selectedGenre} selectedPlatform={selectedPlatform}></GameGrid> */}
-       <PlatformSelector
-          onSelectPlatform={(platform) =>
-            setGameQuery({ ...gameQuery, platform })
-          }
-          selectedPlatform={gameQuery.platform}
-        ></PlatformSelector>
-        <SortSelector onSelectOrdering={(option) => setGameQuery({ ...gameQuery, ordering: option })} selectedOrdering={gameQuery.ordering}></SortSelector>
+      <GridItem area="main" paddingX="5">
+        <HStack justifyContent="space-around">
+            <PlatformSelector
+            onSelectPlatform={(platform) =>
+                setGameQuery({ ...gameQuery, platform })
+              }
+              selectedPlatform={gameQuery.platform}
+            ></PlatformSelector>
+            <SortSelector
+              onSelectOrdering={(option) =>
+                setGameQuery({ ...gameQuery, ordering: option })
+              }
+              selectedOrdering={gameQuery.ordering}
+            ></SortSelector>
+            <Box as="div" display={"inline"}hideBelow={"sm"} hideFrom={"md"}><GenreSelector selectedGenre={gameQuery.genreName} onSelectGenre={(genreName) =>
+            setGameQuery({...gameQuery, genreName})}
+            ></GenreSelector></Box>
+        </HStack>
         <GameGrid gameQuery={gameQuery} />
       </GridItem>
     </Grid>

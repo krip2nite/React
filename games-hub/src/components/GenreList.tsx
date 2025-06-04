@@ -3,7 +3,7 @@ import useGenre from "../hooks/useGenre";
 import { FC } from "react";
 
 interface Props {
-  onSelectGenre: (genreslug: string) => void
+  onSelectGenre: (genreslug: string | null) => void
   selectedGenre: string | null;
 }
 
@@ -23,6 +23,18 @@ const GenreList : FC<Props> = ({onSelectGenre, selectedGenre}) => {
         </Text>
       ) : (
         <List.Root listStyle="none" maxHeight="85vh" overflow="auto">
+          <List.Item key={"g.id"}>
+            <HStack marginStart={"4vw"}>
+              <Button
+                fontWeight={!selectedGenre ? "bold" : "normal"}
+                variant={"outline"}
+                borderWidth="0"
+                onClick={() => onSelectGenre(null)}
+              >
+                All Genres
+              </Button>
+            </HStack>
+          </List.Item>
           {genres.map((g) => (
             <List.Item key={g.id}>
               <HStack padding={2}>

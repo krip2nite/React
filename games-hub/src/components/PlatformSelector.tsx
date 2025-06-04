@@ -6,7 +6,7 @@ import { FC, useState } from 'react'
 import MotionComponent from './MotionComponent'
 
 interface Props{
-    onSelectPlatform: (selectedPlatform: ParentPlatform) => void;
+    onSelectPlatform: (selectedPlatform: ParentPlatform | null) => void;
     selectedPlatform: ParentPlatform | null;
 }
 const duration = 0.7;
@@ -29,8 +29,10 @@ const PlatformSelector: FC<Props> = ({onSelectPlatform, selectedPlatform})=> {
         <Menu.Positioner>
           <MotionComponent duration={duration}>
             <Menu.Content>
-              {platforms.map(p => <Menu.Item key={p.id} value={p.id}
-              onClick={() => {onSelectPlatform(p), setIsOpen(false)}}>{p.name}</Menu.Item>)}
+              <Menu.Item key={"platform"} value={""}
+               onClick={() => {onSelectPlatform(null); setIsOpen(false)}}>All platforms</Menu.Item>
+               {platforms.map(p => <Menu.Item key={p.id} value={p.id}
+               onClick={() => {onSelectPlatform(p); setIsOpen(false)}}>{p.name}</Menu.Item>)}
             </Menu.Content>
           </MotionComponent>
         </Menu.Positioner>
