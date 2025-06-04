@@ -1,18 +1,13 @@
 import {FC, useRef} from 'react'
-interface Props {
-    submitter: (user: string) => void;
-    counter: number;
-    submitterCounter: (counter: number)=>void
-}
+import useUserStore from '../state-management/store';
 
-const Login: FC<Props> = ({submitter, submitterCounter, counter}) => {
+const Login: FC = () => {
+    const login = useUserStore(s => s.login);
 const inputRef = useRef<HTMLInputElement>(null);
   return (
     <form onSubmit={(event) => {
         event.preventDefault();
-        submitter(inputRef.current?.value || "");
-        submitterCounter(counter + 1);
-
+        login(inputRef.current?.value || "")
     }}>
         <input ref={inputRef} placeholder='Enter username' />
        

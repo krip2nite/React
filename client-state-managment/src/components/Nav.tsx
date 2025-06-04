@@ -1,9 +1,8 @@
 import { FC } from 'react'
-interface Props {
-    user: string;
-    counter: number;
-}
-const Nav: FC<Props> = ({user, counter}) => {
+import useUserStore from '../state-management/store';
+
+const Nav: FC= () => {
+    const {user, counter} = useUserStore();
   return (
     <div>
         <p>User: {user}</p>

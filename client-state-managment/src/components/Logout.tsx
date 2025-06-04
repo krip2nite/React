@@ -1,10 +1,10 @@
 import  { FC } from 'react'
-interface Props {
-    submitter: () => void
-}
-const Logout: FC<Props> = ({submitter}) => {
+import useUserStore from '../state-management/store'
+
+const Logout: FC= () => {
+    const logout = useUserStore(s => s.logout)
   return (
-    <button onClick={() => submitter()}>Logout</button>
+    <button onClick={logout}>Logout</button>
   )
 }
 
