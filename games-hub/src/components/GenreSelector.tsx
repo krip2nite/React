@@ -48,7 +48,7 @@ const GenreSelector: FC<Props> = ({onSelectGenre, selectedGenre}) => {
     </Menu.Root>}
     </>
     
-  )
+  );
 }
 
-export default GenreSelector
+export default GenreSelector;

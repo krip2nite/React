@@ -10,8 +10,6 @@ import SortSelector from "./components/SortSelector";
 import GenreSelector from "./components/GenreSelector";
 
 function App() {
-  // const [selectedGenre, setSelectedGenre] = useState<string | null>(null);  
-  // const [selectedPlatform, setSelectedPlatform] = useState<ParentPlatform | null>(null);
   const [gameQuery, setGameQuery] = useState<GameQuery>({} as GameQuery);
   return (
     <Grid
@@ -30,8 +28,6 @@ function App() {
       </GridItem>
       <Stack hideBelow="md">
         <GridItem area="aside" paddingX="5">
-
-          {/* <GenreList selectedGenre={selectedGenre} onSelectGenre={(selectedGenre) => setSelectedGenre(selectedGenre)}></GenreList> */}
         <GenreList
             selectedGenre={gameQuery.genreName}
             onSelectGenre={(genreName: string | null) =>
@@ -42,21 +38,21 @@ function App() {
       </Stack>
       <GridItem area="main" paddingX="5">
         <HStack justifyContent="space-around">
-            <PlatformSelector
+           <PlatformSelector
             onSelectPlatform={(platform) =>
-                setGameQuery({ ...gameQuery, platform })
-              }
-              selectedPlatform={gameQuery.platform}
-            ></PlatformSelector>
-            <SortSelector
-              onSelectOrdering={(option) =>
-                setGameQuery({ ...gameQuery, ordering: option })
-              }
-              selectedOrdering={gameQuery.ordering}
-            ></SortSelector>
-            <Box as="div" display={"inline"}hideBelow={"sm"} hideFrom={"md"}><GenreSelector selectedGenre={gameQuery.genreName} onSelectGenre={(genreName) =>
-            setGameQuery({...gameQuery, genreName})}
-            ></GenreSelector></Box>
+              setGameQuery({ ...gameQuery, platform })
+            }
+            selectedPlatform={gameQuery.platform}
+           ></PlatformSelector>
+          <SortSelector
+            onSelectOrdering={(option) =>
+              setGameQuery({ ...gameQuery, ordering: option })
+            }
+            selectedOrdering={gameQuery.ordering}
+          ></SortSelector>
+          <Box as="div" display={"inline"}hideBelow={"sm"} hideFrom={"md"}><GenreSelector selectedGenre={gameQuery.genreName} onSelectGenre={(genreName) =>
+          setGameQuery({...gameQuery, genreName})}
+          ></GenreSelector></Box>
         </HStack>
         <GameGrid gameQuery={gameQuery} />
       </GridItem>
