@@ -3,14 +3,15 @@ import { FaChevronDown, FaChevronUp } from "react-icons/fa";
 import { FC, useState } from "react";
 import sortOptions from "../config/sort-config.json"
 import MotionComponent from "./MotionComponent";
+import useGameQueryStore from "../../state-management/store";
+
 export type SortOption = typeof sortOptions[0]
-interface Props {
-  selectedOrdering: SortOption | null;
-  onSelectOrdering: (platform: SortOption | null) => void;
-}
+
 const duration = 0.7;
-const SortSelector: FC<Props> = ({ onSelectOrdering, selectedOrdering}) => {
+const SortSelector: FC = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
+  const selectedOrdering = useGameQueryStore(s => s.ordering);
+  const onSelectOrdering = useGameQueryStore(s => s.setOrdering);
   return (
     <>
           <Menu.Root onExitComplete={() => setIsOpen(false)}>

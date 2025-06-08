@@ -3,15 +3,16 @@ import { FC, useState } from 'react'
 import { FaChevronDown, FaChevronUp } from 'react-icons/fa'
 import MotionComponent from './MotionComponent';
 import useGenre from '../hooks/useGenre';
+import useGameQueryStore from '../../state-management/store';
 
-interface Props {
-    onSelectGenre: (selectedGenre: string|null) => void;
-    selectedGenre: string | null
-}
+
 const duration=0.7;
-const GenreSelector: FC<Props> = ({onSelectGenre, selectedGenre}) => {
-    const {error, data:genres, isLoading} = useGenre();
+const GenreSelector: FC = () => {
+   const {error, data:genres, isLoading} = useGenre();
    const [isOpen, setIsOpen] =  useState<boolean>(false);
+   const selectedGenre = useGameQueryStore(s => s.genre);
+   const onSelectGenre = useGameQueryStore(s => s.setGenre);
+
    function getGenreName(genreSlug: string | null): string | null {
     let res: string | null = null;
     if (genreSlug) {

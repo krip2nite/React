@@ -22,5 +22,5 @@
     "noFallthroughCasesInSwitch": true,
     "noUncheckedSideEffectImports": true
   },
-  "include": ["src", "state-managment/store.ts"]
+  "include": ["src", "state-management/store.ts"]
 }

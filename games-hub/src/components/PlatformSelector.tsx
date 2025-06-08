@@ -1,18 +1,17 @@
 import { Button, Menu, Portal, Spinner } from '@chakra-ui/react'
 import { FaChevronDown, FaChevronUp } from 'react-icons/fa'
 import usePlatform from '../hooks/usePlatform'
-import ParentPlatform from '../model/ParentPlatform'
 import { FC, useState } from 'react'
 import MotionComponent from './MotionComponent'
+import useGameQueryStore from '../../state-management/store';
 
-interface Props{
-    onSelectPlatform: (selectedPlatform: ParentPlatform | null) => void;
-    selectedPlatform: ParentPlatform | null;
-}
+
 const duration = 0.7;
-const PlatformSelector: FC<Props> = ({onSelectPlatform, selectedPlatform})=> {
+const PlatformSelector: FC = ()=> {
     const {error,data: platforms, isLoading} = usePlatform()
     const [isOpen, setIsOpen] = useState<boolean>(false)
+    const selectedPlatform = useGameQueryStore(s => s.platform);
+    const onSelectPlatform = useGameQueryStore(s => s.setPlatform)
   return (
     <>
     {isLoading && <Spinner/>}
