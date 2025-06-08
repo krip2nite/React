@@ -16,7 +16,7 @@ const GenreSelector: FC = () => {
    function getGenreName(genreSlug: string | null): string | null {
     let res: string | null = null;
     if (genreSlug) {
-      const genre = genres.find(g => genreSlug === g.slug);
+      const genre = genres?.find(g => genreSlug === g.slug);
       genre && (res = genre.name)
     }
     return res;
@@ -40,7 +40,7 @@ const GenreSelector: FC = () => {
             <Menu.Content>
             <Menu.Item key={"genre"} value={""}
                onClick={() => {onSelectGenre(null); setIsOpen(false)}}>All genres</Menu.Item>
-              {genres.map(g => <Menu.Item key={g.slug} value={g.slug}
+              {genres?.map(g => <Menu.Item key={g.slug} value={g.slug}
                onClick={() => {onSelectGenre(g.slug); setIsOpen(false)}}>{g.name}</Menu.Item>)}
             </Menu.Content>
           </MotionComponent>

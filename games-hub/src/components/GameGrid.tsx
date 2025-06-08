@@ -8,7 +8,7 @@ const GameGrid: FC = () => {
   return (
     <>
     {isLoading && <Spinner></Spinner>}
-    {error? <Text color={"red"} fontSize={"2rem"}>{error}</Text> : <SimpleGrid marginStart={{
+    {error? <Text color={"red"} fontSize={"2rem"}>{error.message}</Text> : <SimpleGrid marginStart={{
       base:8,
       sm: 5,
       md:0
