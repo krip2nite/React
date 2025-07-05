@@ -1,5 +1,5 @@
 import { FC } from "react";
-import _, { keyBy } from "lodash"
+import _ from "lodash"
 import StatisticsLineChart from "./StatisticsLineChart";
 interface Props{
     numbers: number[];

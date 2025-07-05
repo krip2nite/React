@@ -18,7 +18,7 @@ const StatisticsSelector: FC = () => {
     switch(lastPart) {
       case "age": res = "Age Statistics"; break;
       case "department": res = "Department Statistics"; break;
-      case "salary": res = "Salary Statistics"; 
+      case "salary": res = "Salary Statistics"; break; 
     }
     return res;
    }
