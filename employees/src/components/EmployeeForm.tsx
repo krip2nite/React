@@ -1,4 +1,4 @@
-import { FC } from "react";
+import React, { FC } from "react"; 
 import { Employee } from "../model/dto-types";
 import { useForm } from "react-hook-form";
 import employeesConfig from "../config/employees-config.json"
@@ -21,8 +21,16 @@ const EmployeeForm: FC<Props> = ({ submitter }) => {
     const {
         register,
         handleSubmit,
-        formState: { errors },
+        formState: { errors, isSubmitSuccessful },
+        reset 
     } = useForm<Employee>();
+
+    React.useEffect(() => {
+        if (isSubmitSuccessful) {
+            reset(); 
+        }
+    }, [isSubmitSuccessful, reset]); 
+
     return (
         <Stack as="form" onSubmit={handleSubmit(data => submitter(data))} height="80vh" justifyContent={"space-around"}>
             <SimpleGrid
@@ -38,7 +46,6 @@ const EmployeeForm: FC<Props> = ({ submitter }) => {
                         <NativeSelect.Field
                             placeholder="Select Department"
                             {...register("department", { required: true })}
-
                         >
                             {employeesConfig.departments.map(d => <option key={d} value={d}>{d}</option>)}
                         </NativeSelect.Field>
@@ -62,13 +69,14 @@ const EmployeeForm: FC<Props> = ({ submitter }) => {
                     <Input {...register("salary", {
                         required: true, min: employeesConfig.minSalary,
                         max: employeesConfig.maxSalary
-                    })} type="number" size="sm" placeholder={`enetr salary [${employeesConfig.minSalary}-${employeesConfig.maxSalary}]`} />
+                    })} type="number" size="sm" placeholder={`enter salary [${employeesConfig.minSalary}-${employeesConfig.maxSalary}]`} />
                     <Field.ErrorText>{`Salary must be in the range [${employeesConfig.minSalary}-${employeesConfig.maxSalary}]`}</Field.ErrorText>
                 </Field.Root>
             </SimpleGrid>
             <HStack justifyContent={'space-around'} >
-                <Button type="submit" colorPalette={"blue"} variant="subtle">Save</Button>
-                <Button type="reset" colorPalette={"blue"} variant="subtle">Reset</Button>
+                {/* Changed colorPalette to colorScheme for Chakra UI */}
+                <Button type="submit" colorScheme={"blue"} variant="subtle">Save</Button>
+                <Button type="reset" colorScheme={"blue"} variant="subtle">Reset</Button>
             </HStack>
         </Stack>
     );
